@@ -6,8 +6,20 @@ on:
       - main
 
 jobs:
-  deploy:
+  info:
+    name: Mostrar información del repositorio
     runs-on: ubuntu-latest
+    steps:
+      - name: Mostrar usuario, repo y rama
+        run: |
+          echo "Usuario de GitHub: ${{ github.actor }}"
+          echo "Repositorio: ${{ github.repository }}"
+          echo "Rama: ${{ github.ref }}"
+
+  deploy:
+    name: Construir y subir imagen del backend
+    runs-on: ubuntu-latest
+    needs: info
 
     steps:
       - name: Checkout del código
